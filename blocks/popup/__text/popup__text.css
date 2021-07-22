@@ -1,0 +1,28 @@
+.popup__text {
+    width: 358px;
+    margin: 0 auto;
+    margin-bottom: 30px;
+    border: 0;
+    box-sizing: border-box;
+    border-bottom: 1px solid #bcbcc4;
+    height: 27px;
+    font-family: Inter;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 14px;
+    line-height: 17px;
+  }
+  
+  .popup__text:focus {
+    outline-color: #6495ED;
+  }
+  
+  .popup__text:last-child {
+    margin-bottom: 48px;
+  }
+
+  @media screen and (max-width: 900px) {
+    .popup__text {
+      width: 238px;
+    }
+  }

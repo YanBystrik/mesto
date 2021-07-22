@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="ru">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="./pages/index.css" rel="stylesheet">
+    <title>Mesto</title>
+  </head>
+  <body class="root">
+    <div class="page">
+        <header class="header">
+            <img class="header__logo" src="./images/header_logo.png" alt="Лого">
+        </header>
+        <section class="profile">
+            <div class="profile__content">
+                <img class="profile__avatar" src="./images/Avatar.png" alt="Аватар">
+                <div class="profile__info">
+                    <ul class="profile__text">
+                        <li class="profile__title">Жак-Ив Кусто </li>
+                        <li class="profile__subtitle">Исследователь океана</li>
+                    </ul>
+                    <button class="profile__edit-button"><img class="profile__edit-image" src="./images/Edit_Button.png" alt="Кнопка изменения профиля"></button>
+                </div>
+            </div>
+            <button class="profile__add-button"><img class="profile__add-image" src="./images/Add Button.png" alt="Кнопка добавления фото"></button>
+        </section>
+        <section class="elements">
+            <div class="element">
+                <img class="element__image" src="./images/kirill-pershin-dH-RKxKs6to-unsplash-min.jpg" alt="Карачаевск">
+                <div class="element__info">
+                    <p class="element__title">Карачаевск</p>
+                    <button class="element__like"><img src="./images/like.svg" alt="Лайк"></button>
+                </div>
+            </div>
+            <div class="element">
+                <img class="element__image" src="./images/irina-shishkina-dp0Z-i7zYHc-unsplash.jpg" alt="Дорога">
+                <div class="element__info">
+                    <p class="element__title">Дорога</p>
+                    <button class="element__like"><img src="./images/like.svg" alt="Лайк"></button>
+                </div>
+            </div>
+            <div class="element">
+                <img class="element__image" src="./images/danil-aksenov-u2NuILZQgk0-unsplash-min.jpg" alt="Арарат">
+                <div class="element__info">
+                    <p class="element__title">Гора Арарат</p>
+                    <button class="element__like"><img src="./images/like.svg" alt="Лайк"></button>
+                </div>
+            </div>
+            <div class="element">
+                <img class="element__image" src="./images/irina-shishkina-dp0Z-i7zYHc-unsplash.jpg" alt="Дорога">
+                <div class="element__info">
+                    <p class="element__title">Дорога</p>
+                    <button class="element__like"><img src="./images/like.svg" alt="Лайк"></button>
+                </div>
+            </div>
+            <div class="element">
+                <img class="element__image" src="./images/danil-aksenov-u2NuILZQgk0-unsplash-min.jpg" alt="Гора Арарат">
+                <div class="element__info">
+                    <p class="element__title">Гора Арарат</p>
+                    <button class="element__like"><img src="./images/like.svg" alt="Лайк"></button>
+                </div>
+            </div>
+            <div class="element">
+                <img class="element__image" src="./images/kirill-pershin-dH-RKxKs6to-unsplash-min.jpg" alt="Карачаево-Черкессия">
+                <div class="element__info">
+                    <p class="element__title">Карачаево-Черкессия</p>
+                    <button class="element__like"><img src="./images/like.svg" alt="Лайк"></button>
+                </div>
+            </div>
+        </section>
+        <footer class="footer">
+            <p class="footer__text">© 2020 Mesto Russia</p>
+        </footer>
+        <div class="popup">
+            <div class="popup__position">
+                <button class="popup__close"><img src="./images/Close_Icon.png"></button>
+                <form class="popup__container">
+                    <p class="popup__title">Редактировать профиль</p>
+                    <div class="popup__column">
+                    <input type="text" value="Жак-Ив Кусто" class="popup__text popup__name">
+                    <input type="text" value="Исследователь океана" class="popup__text popup__job">
+                    </div>
+                    <button type="submit" class="popup__submit"> Cохранить </button>
+                </form>
+            </div>
+        </div>
+    </div>
+    <!-- <script type="text/javascript" src="./scripts/popup__open.js"></script>
+    <script type="text/javascript" src="./scripts/popup__close.js"></script> -->
+    <script type="text/javascript" src="./scripts/script.js"></script>
+  </body>
+</html>

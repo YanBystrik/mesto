@@ -1,0 +1,11 @@
+.popup__position {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: repeat(3, 1fr);
+}
+
+@media screen and (max-width: 900px) {
+    .popup__position {
+        grid-template-columns: 320px;
+    }
+}
