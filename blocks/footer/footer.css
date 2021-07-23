@@ -4,10 +4,15 @@
     margin-top: 98px;
 }
 
+@media screen and (max-width:900px) {
+    .footer {
+        margin-left: 19px;
+    }
+}
+
 @media screen and (max-width:690px) {
     .footer {
         margin-top: 48px;
-        margin-left: 19px;
         max-width: 320px;
     }
 }

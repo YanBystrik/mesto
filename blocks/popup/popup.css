@@ -1,9 +1,9 @@
 .popup {
     display: none;
-    width:1280px;
+    max-width:1280px;
     min-height:100%;
     background-color: rgba(0,0,0,0.5);
-    overflow:hidden;
+    overflow:auto;
     position:fixed;
     top:0px;
     margin: 0;
