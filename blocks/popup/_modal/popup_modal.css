@@ -1,0 +1,12 @@
+.popup_modal {
+    text-align: center;
+    white-space: nowrap;
+}
+
+.popup_modal::after {
+    display: inline-block;
+    vertical-align: middle;
+    width: 0;
+    height: 100%;
+    content: '';
+}

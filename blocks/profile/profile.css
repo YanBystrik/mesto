@@ -3,21 +3,21 @@
     flex-direction: row;
     justify-content: space-between;
     margin: 0 auto;
-    margin-top: 81px;
+    margin-top: 40px;
     max-width: 880px;
 }
 
 @media screen and (max-width: 900px) {
     .profile {
-        margin-left: 27px;
+        padding-left: 27px;
     }
 }
 
 @media screen and (max-width: 690px) {
     .profile {
-        max-width: 320px;
+        padding-left: 0;
+        max-width: 282px;
         display: block;
-        margin: 0 auto;
         margin-top: 70px;
     }
 }
