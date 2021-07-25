@@ -8,8 +8,8 @@ function func () {
    let popupName = document.querySelector('.profile__title');
    let popupJob = document.querySelector('.profile__subtitle');
 
-   let nameInput = document.querySelector('.popup__text_name');
-   let nameJob = document.querySelector('.popup__text_job');
+   let nameInput = document.querySelector('.popup__text_input_name');
+   let nameJob = document.querySelector('.popup__text_input_job');
 
    nameInput.setAttribute = ('value', popupName.textContent);
    nameJob.setAttribute = ('value', popupJob.textContent);
@@ -30,8 +30,8 @@ closeButton.addEventListener('click', closePopup);
 
 // Сохранить изменения
 let formElement = document.querySelector('.popup__container');
-let nameInput = formElement.querySelector('.popup__text_name');
-let jobInput = formElement.querySelector('.popup__text_job');
+let nameInput = formElement.querySelector('.popup__text_input_name');
+let jobInput = formElement.querySelector('.popup__text_input_job');
 
 function formSubmitHandler (evt) {
     evt.preventDefault();
