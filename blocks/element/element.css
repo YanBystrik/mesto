@@ -1,4 +1,6 @@
 .element {
+    display: flex;
+    flex-direction: column;
     background-color: white;
     border-radius: 10px;
     width: 282px;

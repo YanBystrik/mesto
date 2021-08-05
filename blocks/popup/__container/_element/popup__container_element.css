@@ -1,0 +1,6 @@
+.popup__container_element {
+    background-color: transparent;
+    grid-column: 2/3;
+    grid-row: 2/3;
+    width: min-content;
+  }

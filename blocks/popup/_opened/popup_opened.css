@@ -1,5 +1,5 @@
 .popup_opened {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    grid-template-rows: 1fr auto 1fr;
+    visibility: visible;
+    opacity: 1;
+    
 }
