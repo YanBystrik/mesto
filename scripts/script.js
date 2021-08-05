@@ -113,8 +113,8 @@ const initialCards = [
      //Открыть картинку   
         const openPreviewImg = elementCard.querySelector ('.element__image').addEventListener('click', function (evt){
         document.querySelector('.popup_element').classList.add('popup_opened');
-        document.querySelector('.popup_element_image').src = item.link;
-        document.querySelector('.popup_element_title').textContent = item.name;
+        document.querySelector('.popup__viewer_image').src = item.link;
+        document.querySelector('.popup__viewer_title').textContent = item.name;
 
     });
 
