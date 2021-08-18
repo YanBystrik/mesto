@@ -37,9 +37,9 @@ function closePopup(popupHide) {
 profileEdit.addEventListener("click", function (evt) {
   nameInput.value = profileName.textContent;
   jobInput.value = profileJob.textContent;
-  hideInputError(formProfile, nameInput, ValidateObjectForAnotherFile);
-  hideInputError(formProfile, jobInput, ValidateObjectForAnotherFile);
-  toggleButtonState(inputListProfile, popupSubmitProfile, ValidateObjectForAnotherFile);
+  hideInputError(formProfile, nameInput, validateObject);
+  hideInputError(formProfile, jobInput, validateObject);
+  toggleButtonState(inputListProfile, popupSubmitProfile, validateObject);
   openPopup(popupProfile);
 });
 
@@ -58,9 +58,9 @@ profileContainer.addEventListener("submit", function (evt) {
 
 //Окно добавления фото - открыть
 createPopupOpenButton.addEventListener("click", function (evt) {
-  hideInputError(formCreate, placeInput, ValidateObjectForAnotherFile);
-  hideInputError(formCreate, urlInput, ValidateObjectForAnotherFile);
-  toggleButtonState(inputListCreate, popupSubmitCreate, ValidateObjectForAnotherFile);
+  hideInputError(formCreate, placeInput, validateObject);
+  hideInputError(formCreate, urlInput, validateObject);
+  toggleButtonState(inputListCreate, popupSubmitCreate, validateObject);
   openPopup(popupCreate);
 });
 

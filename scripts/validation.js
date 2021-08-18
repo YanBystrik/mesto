@@ -72,7 +72,7 @@ const enableValidation = (validationClasses) => {
   });
 };
 
-const ValidateObjectForAnotherFile = {
+const validateObject = {
   formSelector: ".popup__form",
   inputSelector: ".popup__input",
   submitButtonSelector: ".popup__submit",
@@ -81,11 +81,4 @@ const ValidateObjectForAnotherFile = {
   errorClass: "error_active",
 };
 
-enableValidation({
-  formSelector: ".popup__form",
-  inputSelector: ".popup__input",
-  submitButtonSelector: ".popup__submit",
-  inactiveButtonClass: "popup__submit_invalid",
-  inputErrorClass: "popup__input_invalid",
-  errorClass: "error_active",
-});
+enableValidation(validateObject);
