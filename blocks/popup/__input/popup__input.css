@@ -1,7 +1,7 @@
-.popup-add__text {
+.popup__input {
     width: 358px;
     margin: 0 auto;
-    margin-bottom: 30px;
+    /* margin-bottom: 30px; */
     border: 0;
     box-sizing: border-box;
     border-bottom: 1px solid #bcbcc4;
@@ -13,16 +13,16 @@
     line-height: 17px;
   }
   
-  .popup-add__text:focus {
+  .popup__input:focus {
     outline-color: #6495ED;
   }
   
-  .popup-add__text:last-child {
+  .popup__input:last-child {
     margin-bottom: 48px;
   }
 
   @media screen and (max-width: 490px) {
-    .popup-add__text {
+    .popup__input {
       width: 238px;
     }
   }

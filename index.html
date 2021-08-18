@@ -16,7 +16,7 @@
                 <img class="profile__avatar" src="./images/Avatar.png" alt="Аватар">
                 <div class="profile__info">
                     <div class="profile__text">
-                        <h1 class="profile__title">Жак-Ив Кусто </h1>
+                        <h1 class="profile__title">Жак-Ив Кусто</h1>
                         <p class="profile__subtitle">Исследователь океана</p>
                     </div>
                     <button class="profile__edit-button" type="button"></button>
@@ -39,36 +39,49 @@
         <footer class="footer">
             <p class="footer__text">© 2020 Mesto Russia</p>
         </footer>
-        <div class="popup">
-            <button class="popup__close" type="button"></button>
-            <div class="popup__container">
+        <div class="popup popup_profile">
+            <button class="popup__close popup__close_profile" type="button"></button>
+            <div class="popup__container popup__container_profile">
                 <h2 class="popup__title">Редактировать профиль</h2>
-                <form class="popup__column"  name="profile-edit"> 
-                    <input type="text" value="Жак-Ив Кусто" name="profile-name" class="popup__text popup__text_input_name">
-                    <input type="text" value="Исследователь океана" name="profile-job" class="popup__text popup__text_input_job">
-                    <button type="submit" class="popup__submit"> Cохранить </button>
+                <form class="popup__form"  name="profile">
+                    <label class="popup__form-field">
+                        <input type="text" id="name" value="Жак-Ив Кусто" name="profile-name" class="popup__input popup__input_text_name" required minlength="2" maxlength="40">
+                        <span id="name-error" class="error"></span>
+                    </label> 
+                    <label class="popup__form-field">   
+                        <input type="text" id="job" value="Исследователь океана" name="profile-job" class="popup__input popup__input_text_job" required minlength="2" maxlength="200">
+                        <span id="job-error" class="error"></span>
+                    </label> 
+                    <button type="submit" class="popup__submit popup__submit_profile popup__submit_valid"> Cохранить </button>
                 </form> 
             </div>
         </div>
-        <div class="popup-add">
-            <button class="popup-add__close" type="button"></button>
-            <div class="popup-add__container">
-                <h2 class="popup-add__title">Новое Место</h2>
-                <form class="popup-add__column"  name="profile-edit"> 
-                    <input type="text" placeholder="Название" name="card-name" class="popup-add__text popup-add__text_input_name">
-                    <input type="text" placeholder="Ссылка" name="card-url" class="popup-add__text popup-add__text_input_url">
-                    <button type="submit" class="popup-add__submit">Создать</button>
+        <div class="popup popup_create">
+            <button class="popup__close popup__close_create" type="button"></button>
+            <div class="popup__container">
+                <h2 class="popup__title">Новое Место</h2>
+                <form class="popup__form"  name="create" novalidate>
+                    <label class="popup__form-field">
+                        <input type="text" id="place" placeholder="Название" name="card-name" class="popup__input popup__input_text_place" minlength="2" maxlength="30" required>
+                        <span id="place-error" class="error"></span>
+                    </label>
+                    <label class="popup__form-field">
+                        <input type="url" id="link" placeholder="Ссылка" name="card-url" class="popup__input popup__input_text_url" required>
+                        <span id="link-error" class="error"></span>
+                    </label>
+                    <button type="submit" class="popup__submit popup__submit_create popup__submit_valid">Создать</button>
                 </form> 
             </div>
         </div>
-        <div class="popup popup_element">
-            <button class="popup__close popup__close_element" type="button"></button>
-            <div class="popup__container popup__container_element">
+        <div class="popup popup_image">
+            <button class="popup__close popup__close_image" type="button"></button>
+            <div class="popup__container popup__container_image">
                 <img class="popup__viewer popup__viewer_image" src="//:0" alt="">
                 <h2 class="popup__viewer popup__viewer_title"></h2>
             </div>
         </div>
     </div>
     <script src="./scripts/script.js"></script>
+    <script src="./scripts/validation.js"></script>
   </body>
 </html>
