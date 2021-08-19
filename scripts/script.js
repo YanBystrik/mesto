@@ -27,7 +27,7 @@ const popupViewerTitle =  document.querySelector(".popup__viewer_title");
 const popupInputTextPlace = document.querySelector(".popup__input_text_place");
 const popupInputTextUrl = document.querySelector(".popup__input_text_url");
 
-// Функция открытия попапа
+//Функция открытия попапа
 function openPopup(popup) {
   popup.classList.add("popup_opened");
   document.addEventListener('keydown', closeByEscape);
@@ -39,7 +39,7 @@ function closePopup(popupHide) {
   document.removeEventListener('keydown', closeByEscape);
 }
 
-// Открыть попап профиля
+//Открыть попап профиля
 profileEdit.addEventListener("click", function (evt) {
   nameInput.value = profileName.textContent;
   jobInput.value = profileJob.textContent;
@@ -49,7 +49,7 @@ profileEdit.addEventListener("click", function (evt) {
   openPopup(popupProfile);
 });
 
-// Сохранить изменения профиля
+//Сохранить изменения профиля
 profileContainer.addEventListener("submit", function (evt) {
   evt.preventDefault();
   profileName.textContent = nameInput.value;
@@ -94,7 +94,7 @@ const initialCards = [
   },
 ];
 
-// Функция добавления фото из массива
+//Функция добавления фото из массива
 function createCard(item) {
   const elementCard = elementTemplate.querySelector(".element").cloneNode(true);
   const cardImage = elementCard.querySelector(".element__image");
@@ -109,7 +109,7 @@ function createCard(item) {
       openPopup(popupImage);
     });
 
-  // Лайк
+  //Лайк
   elementCard
     .querySelector(".element__like")
     .addEventListener("click", function (evt) {
@@ -137,11 +137,11 @@ function addCard(card) {
 
 initialCards.forEach(addCard);
 
-// Добавление фото в массив
-popupSubmitCreate
-  .addEventListener("click", function (evt) {
+//Добавление фото в массив
+formCreate
+  .addEventListener("submit", function (evt) {
     evt.preventDefault();
-    const card = new Object();
+    const card = {};
     card.name = popupInputTextPlace.value;
     card.link = popupInputTextUrl.value;
     popupInputTextPlace.value = '';
@@ -150,9 +150,6 @@ popupSubmitCreate
     closePopup(popupCreate);
   });
 
-  
-
-
 //Закрыть попап ESC
 function closeByEscape(evt) {
   if (evt.key === 'Escape') {
@@ -160,18 +157,6 @@ function closeByEscape(evt) {
     closePopup(openedPopup);
   }
 }
-
-
-
-// document.addEventListener("keydown", function(evt){
-//   if (evt.key === "Escape"){
-//     closePopup(popupProfile);
-
-//     closePopup(popupCreate);
-
-//     closePopup(popupImage);
-//   }
-// });
 
 //Закрыть попап
 const popups = document.querySelectorAll('.popup');
