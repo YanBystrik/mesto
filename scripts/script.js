@@ -131,25 +131,25 @@ const initialCards = [
 //   return elementCard;
 // }
 
-// function addCard(card) {
-//   const elementCard = createCard(card);
-//   cardContainer.prepend(elementCard);
-// }
+function addCard(card) {
+  const elementCard = card.generate();
+  cardContainer.prepend(elementCard);
+}
 
 // initialCards.forEach(addCard);
 
-// //Добавление фото в массив
-// formCreate
-//   .addEventListener("submit", function (evt) {
-//     evt.preventDefault();
-//     const card = {};
-//     card.name = popupInputTextPlace.value;
-//     card.link = popupInputTextUrl.value;
-//     popupInputTextPlace.value = '';
-//     popupInputTextUrl.value = '';
-//     addCard(card);
-//     closePopup(popupCreate);
-//   });
+//Добавление фото в массив
+formCreate 
+  .addEventListener("submit", (evt) => { 
+    evt.preventDefault(); 
+    const card = new Card(inputListCreate, '.element');
+    inputListCreate.text = popupInputTextPlace.value; 
+    inputListCreate.image = popupInputTextUrl.value; 
+    popupInputTextPlace.value = ''; 
+    popupInputTextUrl.value = ''; 
+    addCard(card);
+    closePopup(popupCreate); 
+  }); 
 
 //Закрыть попап ESC
 function closeByEscape(evt) {
@@ -202,7 +202,6 @@ class Card {
   _imageSetEventListeners() {
     this._element.querySelector('.element__image').addEventListener('click', () => {
       this._handleOpenPopupImage();
-      console.log('work');
     });
   }
 
@@ -210,6 +209,7 @@ class Card {
     popupViewerImage.src = this._image;
     popupViewerImage.alt = this._text;
     popupViewerTitle.textContent = this._text
+    document.addEventListener('keydown', closeByEscape);
     popupImage.classList.add('popup_opened');
   }
 
