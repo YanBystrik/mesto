@@ -139,17 +139,18 @@ function addCard(card) {
 // initialCards.forEach(addCard);
 
 //Добавление фото в массив
-formCreate 
-  .addEventListener("submit", (evt) => { 
-    evt.preventDefault(); 
-    const card = new Card(inputListCreate, '.element');
-    inputListCreate.text = popupInputTextPlace.value; 
-    inputListCreate.image = popupInputTextUrl.value; 
-    popupInputTextPlace.value = ''; 
-    popupInputTextUrl.value = ''; 
+formCreate
+  .addEventListener("submit", (evt) => {
+    evt.preventDefault();
+    const cardObj = {};
+    cardObj.name = popupInputTextPlace.value;
+    cardObj.link = popupInputTextUrl.value;
+    const card = new Card(cardObj, '.element');
+    popupInputTextPlace.value = '';
+    popupInputTextUrl.value = '';
     addCard(card);
-    closePopup(popupCreate); 
-  }); 
+    closePopup(popupCreate);
+  });
 
 //Закрыть попап ESC
 function closeByEscape(evt) {
