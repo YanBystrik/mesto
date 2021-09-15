@@ -34,8 +34,7 @@ export {
   popupViewerImage, 
   popupViewerTitle,
   closeByEscape,
-  popupImage, 
-  validateObject
+  popupImage,
 };
 
 // Импорт из модулей
@@ -75,6 +74,7 @@ profileContainer.addEventListener("submit", function (evt) {
 // Окно добавления фото - открыть
 createPopupOpenButton.addEventListener("click", function (evt) {
   formCreate.reset()
+  validFormCreate.toggleButtonState();
   validFormCreate.hideInputError(placeInput);
   validFormCreate.hideInputError(urlInput);
   openPopup(popupCreate);
