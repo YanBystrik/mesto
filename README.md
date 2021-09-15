@@ -4,7 +4,7 @@
 ## Используемые технологии:
 * GRID LayOut
 * Flex
-* Adapive
+* Adaptive
 * JavaScript
 
 ## GH Pages
