@@ -83,7 +83,7 @@ profileEdit.addEventListener("click", () => {
 });
 
 // Сохранить изменения профиля
-profileContainer.addEventListener("submit", function (evt) {
+formProfile.addEventListener("submit", function (evt) {
   evt.preventDefault();
   profileName.textContent = nameInput.value;
   profileJob.textContent = jobInput.value;
@@ -100,7 +100,7 @@ createPopupOpenButton.addEventListener("click", function (evt) {
   createSample.open();
 });
 
-const cardImagePopup = new PopupWithImage(popupImage);
+const cardImagePopup = new PopupWithImage(initialCards, popupImage);
 
 //Создание карточки из коробки
 const cardList = new Section({
@@ -109,7 +109,7 @@ const cardList = new Section({
     const card = new Card({
       data: item, 
       handleCardClick: () => {
-        cardImagePopup.open(item);
+        cardImagePopup.open();
       }
     }, '.element');
     const cardElement = card.generate();
