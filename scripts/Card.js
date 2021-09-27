@@ -1,16 +1,13 @@
 import {
     elementTemplate,
-    popupViewerTitle,
-    popupViewerImage,
-    closeByEscape,
-    popupImage,
-  } from "./script.js";
+  } from "./utils.js";
   
   export default class Card {
-    constructor(data, selector) {
+    constructor({data, handleCardClick}, selector) {
       this._text = data.name;
       this._image = data.link;
       this._selector = selector;
+      this.handleCardClick = handleCardClick;
     }
   
     _getElement() {
@@ -28,6 +25,7 @@ import {
       this._deleteSetEventListeners();
   
       this._element.querySelector(".element__image").src = this._image;
+      this._element.querySelector(".element__image").alt = this._text;
       this._element.querySelector(".element__title").textContent = this._text;
   
       return this._element;
@@ -37,17 +35,14 @@ import {
       this._element
         .querySelector(".element__image")
         .addEventListener("click", () => {
-          this._handleOpenPopupImage();
+          // this._handleOpenPopupImage();
+          this.handleCardClick();
         });
     }
   
-    _handleOpenPopupImage() {
-      popupViewerImage.src = this._image;
-      popupViewerImage.alt = this._text;
-      popupViewerTitle.textContent = this._text;
-      document.addEventListener("keydown", closeByEscape);
-      popupImage.classList.add("popup_opened");
-    }
+    // _handleOpenPopupImage() {
+    //     this.handleCardClick();
+    // }
   
     _deleteSetEventListeners() {
       this._element
@@ -60,6 +55,7 @@ import {
     _handleDeleteImage() {
       if (this._element.closest(".element")) {
         this._element.remove();
+        this._element = null;
       }
     }
   
