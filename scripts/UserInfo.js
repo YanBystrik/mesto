@@ -1,19 +1,19 @@
 export default class UserInfo {
-    constructor({ inputTitle, inputSubtitle }){
-    this.inputTitle = inputTitle;
-    this.inputSubtitle = inputSubtitle;
+    constructor({ profileTitle, profileSubtitle }){
+    this.profileTitle = profileTitle;
+    this.profileSubtitle = profileSubtitle;
     }
 
     getUserInfo(){
         const infoObj = {
-            title: this.inputTitle.textContent,
-            subtitle: this.inputSubtitle.textContent
+            title: this.profileTitle.textContent,
+            subtitle: this.profileSubtitle.textContent
         }
         return infoObj;
     }
 
     setUserInfo(infoObj){
-        this.inputTitle.textContent = infoObj.title;
-        this.inputSubtitle.textContent = infoObj.subtitle;
+        this.profileTitle.value = infoObj.title;
+        this.profileSubtitle.value = infoObj.subtitle;
     }
 }

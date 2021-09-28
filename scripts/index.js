@@ -74,14 +74,14 @@ import UserInfo from "./UserInfo.js";
 
 //Функционал модалки профиля
 const userInfo = new UserInfo({
-  inputTitle: profileName,
-  inputSubtitle: profileJob
+  profileTitle: profileName,
+  profileSubtitle: profileJob
 }); 
 
 const userItems = userInfo.getUserInfo();
 const setInfo = () => {
-  userItems.title = nameInput.value;
-  userItems.subtitle = jobInput.value;
+  nameInput.value = userItems.title;
+  jobInput.value = userItems.subtitle;
 }
 
 const profileSample = new PopupWithForm({
