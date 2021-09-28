@@ -5,15 +5,14 @@ export default class UserInfo {
     }
 
     getUserInfo(){
-        const infoObj = {
+        return {
             title: this.profileTitle.textContent,
             subtitle: this.profileSubtitle.textContent
         }
-        return infoObj;
     }
 
-    setUserInfo(infoObj){
-        this.profileTitle.textContent = infoObj.title;
-        this.profileSubtitle.textContent = infoObj.subtitle;
+    setUserInfo(data){
+        this.profileTitle.textContent = data.title;
+        this.profileSubtitle.textContent = data.subtitle;
     }
 }
