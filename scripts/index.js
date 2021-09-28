@@ -109,7 +109,7 @@ const cardList = new Section({
     const card = new Card({
       data: item, 
       handleCardClick: () => {
-        cardImagePopup.open();
+        cardImagePopup.open(item);
       }
     }, '.element');
     const cardElement = card.generate();
@@ -135,7 +135,7 @@ formCreate
     const card = new Card({
       data: cardObj, 
       handleCardClick: () => {
-        cardImagePopup.open();
+        cardImagePopup.open(cardObj);
       } 
     }, '.element');
     popupInputTextPlace.value = '';
