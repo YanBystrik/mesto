@@ -69,40 +69,72 @@ import FormValidator from "./FormValidator.js";
 import Section from "./Section.js";
 import Popup from "./Popup.js";
 import PopupWithImage from "./PopupWithImage.js";
+import PopupWithForm from "./PopupWithForm.js";
+import UserInfo from "./UserInfo.js";
 
+//Функционал модалки профиля
+const userInfo = new UserInfo({
+  inputTitle: profileName,
+  inputSubtitle: profileJob
+}); 
 
-// Открыть попап профиля
+const userItems = userInfo.getUserInfo();
+const setInfo = () => {
+  userItems.title = nameInput.value;
+  userItems.subtitle = jobInput.value;
+}
+
+const profileSample = new PopupWithForm({
+  popupSelector: popupProfile,
+  form: formProfile,
+  inputList: inputListProfile,
+  handleSubmitForm: (data) => {
+    userInfo.setUserInfo(data);
+    profileSample.close();
+  }
+});
+profileSample.setEventListeners();
+
 profileEdit.addEventListener("click", () => {
-  nameInput.value = profileName.textContent;
-  jobInput.value = profileJob.textContent;
+  setInfo();
   validFormProfile.toggleButtonState();
   validFormProfile.hideInputError(nameInput);
   validFormProfile.hideInputError(jobInput);
-  profileSample.setEventListeners();
   profileSample.open();
 });
 
-// Сохранить изменения профиля
-formProfile.addEventListener("submit", function (evt) {
-  evt.preventDefault();
-  profileName.textContent = nameInput.value;
-  profileJob.textContent = jobInput.value;
-  profileSample.close();
-});
+// // Открыть попап профиля
+// profileEdit.addEventListener("click", () => {
+//   nameInput.value = profileName.textContent;
+//   jobInput.value = profileJob.textContent;
+//   validFormProfile.toggleButtonState();
+//   validFormProfile.hideInputError(nameInput);
+//   validFormProfile.hideInputError(jobInput);
+//   profileSample.setEventListeners();
+//   profileSample.open();
+// });
 
-// Окно добавления фото - открыть
-createPopupOpenButton.addEventListener("click", function (evt) {
-  formCreate.reset()
-  validFormCreate.toggleButtonState();
-  validFormCreate.hideInputError(placeInput);
-  validFormCreate.hideInputError(urlInput);
-  createSample.setEventListeners();
-  createSample.open();
-});
+// // Сохранить изменения профиля
+// formProfile.addEventListener("submit", function (evt) {
+//   evt.preventDefault();
+//   profileName.textContent = nameInput.value;
+//   profileJob.textContent = jobInput.value;
+//   profileSample.close();
+// });
 
-const cardImagePopup = new PopupWithImage(initialCards, popupImage);
+// // Окно добавления фото - открыть
+// createPopupOpenButton.addEventListener("click", function (evt) {
+//   formCreate.reset()
+//   validFormCreate.toggleButtonState();
+//   validFormCreate.hideInputError(placeInput);
+//   validFormCreate.hideInputError(urlInput);
+//   createSample.setEventListeners();
+//   createSample.open();
+// });
 
 //Создание карточки из коробки
+const cardImagePopup = new PopupWithImage(popupImage);
+
 const cardList = new Section({
   items: initialCards,
   renderer: (item) => {
@@ -119,16 +151,37 @@ const cardList = new Section({
 
 cardList.renderItems();
 
-// Добавляем карточку в DOM
-function addCard(card) {
-  const elementCard = card.generate();
-  cardContainer.prepend(elementCard);
-}
+// // Добавляем карточку в DOM
+// function addCard(card) {
+//   const elementCard = card.generate();
+//   cardContainer.prepend(elementCard);
+// }
 
-// Добавление фото в массив
-formCreate
-  .addEventListener("submit", (evt) => {
-    evt.preventDefault();
+// // Добавление фото в массив
+// formCreate
+//   .addEventListener("submit", (evt) => {
+//     evt.preventDefault();
+//     const cardObj = {};
+//     cardObj.name = popupInputTextPlace.value;
+//     cardObj.link = popupInputTextUrl.value;
+//     const card = new Card({
+//       data: cardObj, 
+//       handleCardClick: () => {
+//         cardImagePopup.open(cardObj);
+//       } 
+//     }, '.element');
+//     popupInputTextPlace.value = '';
+//     popupInputTextUrl.value = '';
+//     addCard(card);
+//     createSample.close();
+//   });
+
+//Экземпляры модалок
+const createSample = new PopupWithForm({
+  popupSelector: popupCreate,
+  form: formCreate,
+  inputList: inputListCreate,
+  handleSubmitForm: () => {
     const cardObj = {};
     cardObj.name = popupInputTextPlace.value;
     cardObj.link = popupInputTextUrl.value;
@@ -138,28 +191,18 @@ formCreate
         cardImagePopup.open(cardObj);
       } 
     }, '.element');
-    popupInputTextPlace.value = '';
-    popupInputTextUrl.value = '';
-    addCard(card);
+    const cardElement = card.generate();
+    cardList.addItem(cardElement);
     createSample.close();
-  });
-
-// // Закрыть попап
-// const popups = document.querySelectorAll('.popup');
-// popups.forEach((popup) => {
-//     popup.addEventListener('mousedown', (evt) => {
-//         if (evt.target.classList.contains('popup_opened')) {
-//             closePopup(popup);   
-//         }
-//         if (evt.target.classList.contains('popup__close')) {
-//           closePopup(popup);
-//         }
-//     });
-// });
-
-//Экземпляры модалок
-const createSample = new Popup(popupCreate);
-const profileSample = new Popup(popupProfile);
+  }
+});
+createSample.setEventListeners();
+createPopupOpenButton.addEventListener("click", function (evt) {
+  validFormCreate.toggleButtonState();
+  validFormCreate.hideInputError(placeInput);
+  validFormCreate.hideInputError(urlInput);
+  createSample.open();
+});
 
 // Экземпляры класса для валидации форм
 const validFormCreate = new FormValidator(validateObject, formCreate);
