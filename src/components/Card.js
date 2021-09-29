@@ -1,6 +1,6 @@
 import {
     elementTemplate,
-  } from "./utils.js";
+  } from "../utils/constants.js";
   
   export default class Card {
     constructor({data, handleCardClick}, selector) {
