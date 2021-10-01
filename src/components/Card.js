@@ -1,6 +1,6 @@
-import {
-    elementTemplate,
-  } from "./utils.js";
+// import {
+//     elementTemplate,
+//   } from "../utils/constants.js";
   
   export default class Card {
     constructor({data, handleCardClick}, selector) {
@@ -11,38 +11,41 @@ import {
     }
   
     _getElement() {
-      const cardElement = elementTemplate
-        .querySelector(".element")
-        .cloneNode(true);
+      const cardElement = 
+      document
+      .querySelector(this._selector).content
+      .querySelector(".element")
+      .cloneNode(true);
   
       return cardElement;
     }
   
     generate() {
       this._element = this._getElement();
-      this._likeSetEventListeners();
-      this._imageSetEventListeners();
-      this._deleteSetEventListeners();
+      this._cardImage = this._element.querySelector(".element__image");
+      this._cardTitle = this._element.querySelector(".element__title");
+      this._cardLike = this._element.querySelector(".element__like");
+      this._setEventListeners();
   
-      this._element.querySelector(".element__image").src = this._image;
-      this._element.querySelector(".element__image").alt = this._text;
-      this._element.querySelector(".element__title").textContent = this._text;
+      this._cardImage.src = this._image;
+      this._cardImage.alt = this._text;
+      this._cardTitle.textContent = this._text;
   
       return this._element;
     }
   
+    _setEventListeners(){
+      this._likeSetEventListeners();
+      this._imageSetEventListeners();
+      this._deleteSetEventListeners();
+    }
+
     _imageSetEventListeners() {
-      this._element
-        .querySelector(".element__image")
+      this._cardImage
         .addEventListener("click", () => {
-          // this._handleOpenPopupImage();
           this.handleCardClick();
         });
     }
-  
-    // _handleOpenPopupImage() {
-    //     this.handleCardClick();
-    // }
   
     _deleteSetEventListeners() {
       this._element
@@ -60,16 +63,14 @@ import {
     }
   
     _likeSetEventListeners() {
-      this._element
-        .querySelector(".element__like")
+      this._cardLike
         .addEventListener("click", () => {
           this._likeHandleClick();
         });
     }
   
     _likeHandleClick() {
-      this._element
-        .querySelector(".element__like")
+      this._cardLike
         .classList.toggle("element__like_active");
     }
   }
