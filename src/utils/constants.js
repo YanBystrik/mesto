@@ -25,6 +25,7 @@
  export const popupCloseImage = document.querySelector(".popup__close_image");
  export const popupImage = document.querySelector(".popup_image");
  export const elementTemplate = document.querySelector("#element").content;
+ export const profileAvatar = document.querySelector('.profile__avatar');
   
   // Массив фотокарт
   export const initialCards = [

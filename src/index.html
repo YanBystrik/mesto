@@ -13,11 +13,11 @@
         </header>
         <section class="profile">
             <div class="profile__content">
-                <img class="profile__avatar" src="<%=require('./images/Avatar.png')%>" alt="Аватар">
+                <img class="profile__avatar" src="" alt="Аватар">
                 <div class="profile__info">
                     <div class="profile__text">
-                        <h1 class="profile__title">Жак-Ив Кусто</h1>
-                        <p class="profile__subtitle">Исследователь океана</p>
+                        <h1 class="profile__title"></h1>
+                        <p class="profile__subtitle"></p>
                     </div>
                     <button class="profile__edit-button" type="button"></button>
                 </div>
@@ -25,13 +25,16 @@
             <button class="profile__add-button" type="button"></button>
         </section>
         <section class="elements">
-            <template id="element">
+            <template id="element" class="template">
                 <div class="element">
                     <button class="element__delete" type="button"></button>
                     <img class="element__image" src="//:0" alt="">
                     <div class="element__info">
                         <h2 class="element__title"></h2>
-                        <button class="element__like" type="button"></button>
+                        <div class="element__like-box">
+                            <button class="element__like" type="button"></button>
+                            <p class="element__like-count"></p>
+                        </div>
                     </div>
                 </div>
             </template>
@@ -45,11 +48,11 @@
                 <h2 class="popup__title">Редактировать профиль</h2>
                 <form class="popup__form"  name="profile">
                     <label class="popup__form-field">
-                        <input type="text" id="name" value="" name="profile_name" class="popup__input popup__input_text_name" required minlength="2" maxlength="40">
+                        <input type="text" id="name" value="" name="profileName" class="popup__input popup__input_text_name" required minlength="2" maxlength="40">
                         <span id="name-error" class="error"></span>
                     </label> 
                     <label class="popup__form-field">   
-                        <input type="text" id="job" value="" name="profile_job" class="popup__input popup__input_text_job" required minlength="2" maxlength="200">
+                        <input type="text" id="job" value="" name="profileJob" class="popup__input popup__input_text_job" required minlength="2" maxlength="200">
                         <span id="job-error" class="error"></span>
                     </label> 
                     <button type="submit" class="popup__submit popup__submit_profile popup__submit_valid"> Cохранить </button>
@@ -62,11 +65,11 @@
                 <h2 class="popup__title">Новое Место</h2>
                 <form class="popup__form"  name="create" novalidate>
                     <label class="popup__form-field">
-                        <input type="text" id="place" placeholder="Название" name="card-name" class="popup__input popup__input_text_place" minlength="2" maxlength="30" required>
+                        <input type="text" id="place" placeholder="Название" name="cardName" class="popup__input popup__input_text_place" minlength="2" maxlength="30" required>
                         <span id="place-error" class="error"></span>
                     </label>
                     <label class="popup__form-field">
-                        <input type="url" id="link" placeholder="Ссылка" name="card-url" class="popup__input popup__input_text_url" required>
+                        <input type="url" id="link" placeholder="Ссылка" name="cardUrl" class="popup__input popup__input_text_url" required>
                         <span id="link-error" class="error"></span>
                     </label>
                     <button type="submit" class="popup__submit popup__submit_create popup__submit_valid">Создать</button>
@@ -78,6 +81,15 @@
             <div class="popup__container popup__container_image">
                 <img class="popup__viewer popup__viewer_image" src="//:0" alt="">
                 <h2 class="popup__viewer popup__viewer_title"></h2>
+            </div>
+        </div>
+        <div class="popup popup_delete">
+            <button class="popup__close popup__close_delete" type="button"></button>
+            <div class="popup__container popup__container_delete">
+                <h2 class="popup__title">Вы уверены?</h2>
+                <form class="popup__form"  name="delete">
+                    <button type="submit" class="popup__submit popup__submit_delete popup__submit_valid">Да</button>
+                </form> 
             </div>
         </div>
     </div>
