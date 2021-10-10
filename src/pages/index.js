@@ -18,6 +18,7 @@ import FormValidator from "../components/FormValidator.js";
 import Section from "../components/Section.js";
 import PopupWithImage from "../components/PopupWithImage.js";
 import PopupWithForm from "../components/PopupWithForm.js";
+import PopupWithDelete from "../components/PopupWithDelete.js";
 import UserInfo from "../components/UserInfo.js";
 import Api from "../components/Api.js";
 import './index.css'; 
@@ -31,6 +32,16 @@ api.getUserInfo()
   profileName.textContent = res.name;
   profileJob.textContent = res.about;
   profileAvatar.src = res.avatar;
+})
+.then(() => {
+  //Подгружаем карточки с сервера
+api.getCards()
+  .then(arrayCards => {
+    cardList.renderItems(arrayCards);
+  })
+  .catch(err => {
+    console.error(err);
+  })
 })
 .catch(err => {
   console.error(err);
@@ -68,7 +79,10 @@ profileEdit.addEventListener("click", () => {
   //Функция создания экземпляров Card
   const createCard = (item) => {
     const card = new Card({
-      data: item, 
+      data: item,
+      openPopupWithDelete: (deleteImage) => {
+          deleteSample.open(item._id, deleteImage);    
+      },
       handleCardClick: () => {
         cardImagePopup.open(item);
       }
@@ -82,19 +96,14 @@ profileEdit.addEventListener("click", () => {
       const cardElement = createCard(item);
       const cardLikesCount = cardElement.querySelector('.element__like-count');
       cardLikesCount.textContent = item.likes.length;
-      const deleteButton = cardElement.querySelector('.element__delete');
-      deleteButton.addEventListener('click', () => {
-        deleteSample.open();
-      })
       cardList.addItem(cardElement, 'append');
     }
   }, cardContainer);
-  
-
 
 //Подгружаем карточки с сервера
 api.getCards()
 .then(arrayCards => {
+  console.log(arrayCards);
   cardList.renderItems(arrayCards);
 })
 .catch(err => {
@@ -113,9 +122,11 @@ const createSample = new PopupWithForm({
     cardObj.name = data.cardName;
     cardObj.link = data.cardUrl;
     api.updateCards(cardObj.name, cardObj.link)
-    const card = createCard(cardObj);
-    cardList.addItem(card, 'prepend');
-    createSample.close();
+    .then((res) => {
+      const card = createCard(res);
+      cardList.addItem(card, 'prepend');
+      createSample.close();
+    })
   }
 });
 createSample.setEventListeners();
@@ -124,14 +135,18 @@ createPopupOpenButton.addEventListener("click", function (evt) {
   createSample.open();
 });
 
-const deleteSample = new PopupWithForm({
+//Экземпляр модалки удаления карточки
+const deleteSample = new PopupWithDelete({ 
   popupSelector: ".popup_delete",
-  handleSubmitForm: () => {
-    deleteSample.close();
+  deleteApiRequest: (cardId, deleteImage) => {
+    api.removeCard(cardId)
+    .then(() => {
+       deleteImage(); 
+      deleteSample.close();
+    })
   }
 });
 deleteSample.setEventListeners();
-
 
 // Экземпляры класса для валидации форм
 const validFormCreate = new FormValidator(validateObject, formCreate);

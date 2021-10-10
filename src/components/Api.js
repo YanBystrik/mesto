@@ -52,6 +52,13 @@ export default class Api {
                 about: about.textContent
             })
         })
+        .then(res => {
+          if (res.ok){
+            return res.json();
+          } else {
+            throw  new Error (`Response is not OK with code ${res.status}`);
+          }
+        })
         .catch(err => {
             console.error(err);
           });
@@ -69,8 +76,34 @@ export default class Api {
                   link: link
               })
         })
+        .then(res => {
+          if (res.ok){
+            return res.json();
+          } else {
+            throw  new Error (`Response is not OK with code ${res.status}`);
+          }
+        })
         .catch(err => {
             console.error(err);
         })
+    }
+
+    removeCard(cardId){
+      return fetch(this.url + `/cards/${cardId}`,{
+        method: 'DELETE',
+        headers: {
+          authorization: '8999a51c-1ed0-4ed4-a807-902250d23524',
+        }
+      })
+      .then(res => {
+        if (res.ok){
+          return res.json();
+        } else {
+          throw  new Error (`Response is not OK with code ${res.status}`);
+        }
+      })
+      .catch(err => {
+        console.error(err);
+    })
     }
 }

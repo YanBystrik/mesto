@@ -1,11 +1,22 @@
   export default class Card {
-    constructor({data, handleCardClick}, selector) {
+    constructor({data, openPopupWithDelete, handleCardClick}, selector) {
       this._text = data.name;
       this._image = data.link;
+      this._cardId = data._id;
+      this._userId = data.owner._id;
+      this._myUserId = "fdd469b9fcfa8739145a843b";
       this._selector = selector;
       this.handleCardClick = handleCardClick;
+      this._openPopupWithDelete = openPopupWithDelete;
     }
-  
+    
+    _hideDeleteButton(){
+      if(this._myUserId !== this._userId){
+        this._deleteButton.hidden = true;
+      }
+
+    }
+
     _getElement() {
       const cardElement = 
       document
@@ -21,6 +32,7 @@
       this._cardImage = this._element.querySelector(".element__image");
       this._cardTitle = this._element.querySelector(".element__title");
       this._cardLike = this._element.querySelector(".element__like");
+      this._deleteButton = this._element.querySelector(".element__delete")
       this._setEventListeners();
   
       this._cardImage.src = this._image;
@@ -34,6 +46,7 @@
       this._likeSetEventListeners();
       this._imageSetEventListeners();
       this._deleteSetEventListeners();
+      this._hideDeleteButton();
     }
 
     _imageSetEventListeners() {
@@ -44,17 +57,15 @@
     }
   
     _deleteSetEventListeners() {
-      this._element
-        .querySelector(".element__delete")
+      this._deleteButton
         .addEventListener("click", () => {
-          // this._handleDeleteImage();
+          this._openPopupWithDelete(this.handleDeleteImage);
         });
     }
   
-    _handleDeleteImage() {
+    handleDeleteImage = () => {
       if (this._element.closest(".element")) {
         this._element.remove();
-        this._element = null;
       }
     }
   
