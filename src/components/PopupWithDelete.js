@@ -7,20 +7,6 @@ export default class PopupWithDelete extends Popup{
         this._form = this._popup.querySelector('.popup__form');
     }
 
-    // removeListener(){
-    //     this._form.removeEventListener('submit', (evt) => {
-    //         evt.preventDefault();
-    //         deleteImage();
-    //     });
-    // }
-
-    // deleteImageListener(deleteImage) {
-    //     this._form.addEventListener('submit', (evt) => {
-    //         evt.preventDefault();
-    //         deleteImage();
-    //     });
-    // }
-
     open(cardId, deleteImage){
         super.open()
         this._cardId = cardId;

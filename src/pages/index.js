@@ -10,8 +10,13 @@ import {
     createPopupOpenButton,
     formCreate,
     formProfile,
+    formAvatar,
     validateObject,
-    profileAvatar
+    profileAvatar,
+    popupSubmitCreate,
+    popupSubmitProfile,
+    avatarButton,
+    popupSubmitAvatar
 } from "../utils/constants.js";
 import Card from "../components/Card.js";
 import FormValidator from "../components/FormValidator.js";
@@ -71,24 +76,37 @@ const profileSample = new PopupWithForm({
 profileSample.setEventListeners();
 
 profileEdit.addEventListener("click", () => {
+  popupSubmitProfile.textContent = 'Сохранить';
   setInfo();
   validFormProfile.resetValidation();
   profileSample.open();
 });
 
   //Функция создания экземпляров Card
-  const createCard = (item) => {
-    const card = new Card({
-      data: item,
-      openPopupWithDelete: (deleteImage) => {
-          deleteSample.open(item._id, deleteImage);    
-      },
-      handleCardClick: () => {
-        cardImagePopup.open(item);
-      }
-    }, '#element');
-    return card.generate();
-  };
+const createCard = (item) => {
+  const card = new Card({
+  data: item,
+  openPopupWithDelete: (deleteImage) => {
+  deleteSample.open(item._id, deleteImage);
+  },
+  handleCardClick: () => {
+  cardImagePopup.open(item);
+  },
+  setLike: () => {
+  api.like(item._id)
+  .then((res) => {
+  card.likeCountChange(res);
+  })
+  },
+  deleteLike: () => {
+  api.likeDelete(item._id)
+  .then((res) => {
+  card.likeCountChange(res);
+  })
+  },
+  }, '#element');
+  return card.generate();
+  }; 
 
   //Создание карточки из коробки
   const cardList = new Section({
@@ -103,7 +121,6 @@ profileEdit.addEventListener("click", () => {
 //Подгружаем карточки с сервера
 api.getCards()
 .then(arrayCards => {
-  console.log(arrayCards);
   cardList.renderItems(arrayCards);
 })
 .catch(err => {
@@ -131,8 +148,29 @@ const createSample = new PopupWithForm({
 });
 createSample.setEventListeners();
 createPopupOpenButton.addEventListener("click", function (evt) {
+  popupSubmitCreate.textContent = 'Создать';
   validFormCreate.resetValidation();
   createSample.open();
+});
+
+//Экземпляр модалки аватарки 
+const avatarSample = new PopupWithForm({
+  popupSelector: '.popup_avatar',
+  handleSubmitForm: (data) => {
+    const avatar = {};
+    avatar.link = data.avatarUrl;
+    api.updateAvatar(avatar.link)
+      .then(res => {
+        profileAvatar.src = res.avatar;
+        avatarSample.close();
+      })
+    }
+});
+avatarSample.setEventListeners();
+avatarButton.addEventListener('click', function (evt){
+  popupSubmitAvatar.textContent = 'Сохранить';
+  validFormAvatar.resetValidation()
+  avatarSample.open();
 });
 
 //Экземпляр модалки удаления карточки
@@ -153,3 +191,5 @@ const validFormCreate = new FormValidator(validateObject, formCreate);
 validFormCreate.enableValidation();
 const validFormProfile = new FormValidator(validateObject, formProfile);
 validFormProfile.enableValidation();
+const validFormAvatar = new FormValidator(validateObject, formAvatar);
+validFormAvatar.enableValidation();

@@ -13,7 +13,10 @@
         </header>
         <section class="profile">
             <div class="profile__content">
-                <img class="profile__avatar" src="" alt="Аватар">
+                <div class="profile__avatar-container">
+                    <img class="profile__avatar" src="" alt="Аватар">
+                    <button class="profile__avatar_edit"></button>
+                </div>
                 <div class="profile__info">
                     <div class="profile__text">
                         <h1 class="profile__title"></h1>
@@ -48,11 +51,11 @@
                 <h2 class="popup__title">Редактировать профиль</h2>
                 <form class="popup__form"  name="profile">
                     <label class="popup__form-field">
-                        <input type="text" id="name" value="" name="profileName" class="popup__input popup__input_text_name" required minlength="2" maxlength="40">
+                        <input type="text" id="name" value="" name="profileName" placeholder="Имя" class="popup__input popup__input_text_name" required minlength="2" maxlength="40">
                         <span id="name-error" class="error"></span>
                     </label> 
                     <label class="popup__form-field">   
-                        <input type="text" id="job" value="" name="profileJob" class="popup__input popup__input_text_job" required minlength="2" maxlength="200">
+                        <input type="text" id="job" value="" name="profileJob" placeholder="Вид деятельности" class="popup__input popup__input_text_job" required minlength="2" maxlength="200">
                         <span id="job-error" class="error"></span>
                     </label> 
                     <button type="submit" class="popup__submit popup__submit_profile popup__submit_valid"> Cохранить </button>
@@ -92,7 +95,19 @@
                 </form> 
             </div>
         </div>
+        <div class="popup popup_avatar">
+            <button class="popup__close popup__close_avatar" type="button"></button>
+            <div class="popup__container popup__container_avatar">
+                <h2 class="popup__title">Обновить аватар</h2>
+                <form class="popup__form"  name="avatar">
+                    <label class="popup__form-field">   
+                        <input type="url" id="avatar" value="" name="avatarUrl" placeholder="Ссылка" class="popup__input popup__input_text_avatar" required>
+                        <span id="avatar-error" class="error"></span>
+                    </label>
+                    <button type="submit" class="popup__submit popup__submit_avatar popup__submit_valid">Cохранить</button>
+                </form> 
+            </div>
+        </div>
     </div>
-    <!-- <script type="module" src="./index.js"></script> -->
   </body>
 </html>

@@ -16,6 +16,7 @@
  export const closePopupImage = document.querySelector(".popup_image");
  export const formCreate = document.forms.create;
  export const formProfile = document.forms.profile;
+ export const formAvatar = document.forms.avatar;
  export const inputListCreate = Array.from(formCreate.querySelectorAll('.popup__input'));
  export const inputListProfile = Array.from(formProfile.querySelectorAll('.popup__input'));
  export const placeInput = document.querySelector(".popup__input_text_place");
@@ -26,6 +27,8 @@
  export const popupImage = document.querySelector(".popup_image");
  export const elementTemplate = document.querySelector("#element").content;
  export const profileAvatar = document.querySelector('.profile__avatar');
+ export const avatarButton = document.querySelector('.profile__avatar_edit');
+ export const popupSubmitAvatar = document.querySelector('.popup__submit_avatar');
   
   // Массив фотокарт
   export const initialCards = [
