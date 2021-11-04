@@ -27,20 +27,24 @@ import UserInfo from "../components/UserInfo.js";
 import Api from "../components/Api.js";
 import "./index.css";
 
+let userId = '';
+
 //Экземпляр API
-const api = new Api(
-  "https://nomoreparties.co/v1/cohort-28",
-  profileName,
-  profileJob
+const api = new Api({
+  baseUrl: "https://nomoreparties.co/v1/cohort-28",
+  headers : {
+    authorization: "8999a51c-1ed0-4ed4-a807-902250d23524",
+    "Content-Type": "application/json",
+  }
+}
 );
 
 //Подгружаем инфо пользователя с сервера
 api
   .getUserInfo()
   .then((res) => {
-    profileName.textContent = res.name;
-    profileJob.textContent = res.about;
-    profileAvatar.src = res.avatar;
+    userInfo.setInfoFromApi(res);
+    userId = res._id;
   })
   .then(() => {
     //Подгружаем карточки с сервера
@@ -61,6 +65,7 @@ api
 const userInfo = new UserInfo({
   profileTitle: profileName,
   profileSubtitle: profileJob,
+  profileAvatar: profileAvatar
 });
 
 const setInfo = () => {
@@ -74,14 +79,21 @@ const profileSample = new PopupWithForm({
   popupSelector: ".popup_profile",
   handleSubmitForm: (data) => {
     userInfo.setUserInfo(data);
-    api.updateUserInfo(profileName, profileJob);
-    profileSample.close();
-  },
+    api.updateUserInfo(profileName, profileJob)
+    .then( (res) => {
+      profileSample.close();
+    })
+    .catch(err => {
+      console.error(err);
+    })
+    .finally( () => {
+      popupSubmitProfile.textContent = "Сохранить";
+    })
+  }
 });
 profileSample.setEventListeners();
 
 profileEdit.addEventListener("click", () => {
-  popupSubmitProfile.textContent = "Сохранить";
   setInfo();
   validFormProfile.resetValidation();
   profileSample.open();
@@ -99,17 +111,28 @@ const createCard = (item) => {
         cardImagePopup.open(item);
       },
       setLike: () => {
-        api.like(item._id).then((res) => {
+        api.like(item._id)
+        .then((res) => {
+          card.likeChangeTruth();
           card.likeCountChange(res);
+        })
+        .catch( (err) => {
+          console.error(err);
         });
       },
       deleteLike: () => {
-        api.likeDelete(item._id).then((res) => {
+        api.likeDelete(item._id)
+        .then((res) => {
+          card.likeChangeTruth();
           card.likeCountChange(res);
+        })
+        .catch( (err) => {
+          console.error(err);
         });
       },
     },
-    "#element"
+    "#element",
+    userId
   );
   return card.generate();
 };
@@ -119,23 +142,11 @@ const cardList = new Section(
   {
     renderer: (item) => {
       const cardElement = createCard(item);
-      const cardLikesCount = cardElement.querySelector(".element__like-count");
-      cardLikesCount.textContent = item.likes.length;
       cardList.addItem(cardElement, "append");
     },
   },
   cardContainer
 );
-
-//Подгружаем карточки с сервера
-api
-  .getCards()
-  .then((arrayCards) => {
-    cardList.renderItems(arrayCards);
-  })
-  .catch((err) => {
-    console.error(err);
-  });
 
 //Экземепляр класса модалки с картинкой
 const cardImagePopup = new PopupWithImage(".popup_image");
@@ -148,11 +159,15 @@ const createSample = new PopupWithForm({
     const cardObj = {};
     cardObj.name = data.cardName;
     cardObj.link = data.cardUrl;
-    api.updateCards(cardObj.name, cardObj.link).then((res) => {
+    api.updateCards(cardObj.name, cardObj.link)
+    .then((res) => {
       const card = createCard(res);
       cardList.addItem(card, "prepend");
       createSample.close();
-    });
+    })
+    .catch(err => {
+      console.error(err);
+    })
   },
 });
 createSample.setEventListeners();
@@ -168,10 +183,14 @@ const avatarSample = new PopupWithForm({
   handleSubmitForm: (data) => {
     const avatar = {};
     avatar.link = data.avatarUrl;
-    api.updateAvatar(avatar.link).then((res) => {
-      profileAvatar.src = res.avatar;
+    api.updateAvatar(avatar.link)
+    .then((res) => {
+      userInfo.setInfoFromApi(res);
       avatarSample.close();
-    });
+    })
+    .catch(err => {
+      console.error(err);
+    })
   },
 });
 avatarSample.setEventListeners();
@@ -185,10 +204,14 @@ avatarButton.addEventListener("click", function (evt) {
 const deleteSample = new PopupWithDelete({
   popupSelector: ".popup_delete",
   deleteApiRequest: (cardId, deleteImage) => {
-    api.removeCard(cardId).then(() => {
+    api.removeCard(cardId)
+    .then(() => {
       deleteImage();
       deleteSample.close();
-    });
+    })
+    .catch(err => {
+      console.error(err);
+    })
   },
 });
 deleteSample.setEventListeners();

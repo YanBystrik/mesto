@@ -1,169 +1,87 @@
 export default class Api {
-  constructor(url) {
-    this.url = url;
+  constructor({ baseUrl, headers }) {
+    this._baseUrl = baseUrl;
+    this._headers = headers;
+  }
+
+  _checkResponse(res) {
+    if (res.ok){
+      return res.json();
+    } else {
+      throw new Error(`Response is not OK with code ${res.status}`);
+    }
   }
 
   getUserInfo() {
-    return fetch(this.url + "/users/me", {
-      headers: {
-        authorization: "8999a51c-1ed0-4ed4-a807-902250d23524",
-      },
+    return fetch(this._baseUrl + "/users/me", {
+      headers: this._headers
     })
-      .then((res) => {
-        if (res.ok) {
-          return res.json();
-        } else {
-          throw new Error(`Response is not OK with code ${res.status}`);
-        }
-      })
-      .catch((err) => {
-        console.error(err);
-      });
+      .then(this._checkResponse);
   }
 
   getCards() {
-    return fetch(this.url + "/cards", {
-      headers: {
-        authorization: "8999a51c-1ed0-4ed4-a807-902250d23524",
-      },
+    return fetch(this._baseUrl + "/cards", {
+      headers: this._headers
     })
-      .then((res) => {
-        if (res.ok) {
-          return res.json();
-        } else {
-          throw new Error(`Response is not OK with code ${res.status}`);
-        }
-      })
-      .catch((err) => {
-        console.error(err);
-      });
+    .then(this._checkResponse);
   }
 
   updateUserInfo(name, about) {
-    return fetch(this.url + "/users/me", {
+    return fetch(this._baseUrl + "/users/me", {
       method: "PATCH",
-      headers: {
-        authorization: "8999a51c-1ed0-4ed4-a807-902250d23524",
-        "Content-Type": "application/json",
-      },
+      headers: this._headers,
       body: JSON.stringify({
         name: name.textContent,
         about: about.textContent,
       }),
     })
-      .then((res) => {
-        if (res.ok) {
-          return res.json();
-        } else {
-          throw new Error(`Response is not OK with code ${res.status}`);
-        }
-      })
-      .catch((err) => {
-        console.error(err);
-      });
+    .then(this._checkResponse);
   }
 
   updateCards(name, link) {
-    return fetch(this.url + "/cards", {
+    return fetch(this._baseUrl + "/cards", {
       method: "POST",
-      headers: {
-        authorization: "8999a51c-1ed0-4ed4-a807-902250d23524",
-        "Content-Type": "application/json",
-      },
+      headers: this._headers,
       body: JSON.stringify({
         name: name,
         link: link,
       }),
     })
-      .then((res) => {
-        if (res.ok) {
-          return res.json();
-        } else {
-          throw new Error(`Response is not OK with code ${res.status}`);
-        }
-      })
-      .catch((err) => {
-        console.error(err);
-      });
+    .then(this._checkResponse);
   }
 
   removeCard(cardId) {
-    return fetch(this.url + `/cards/${cardId}`, {
+    return fetch(this._baseUrl + `/cards/${cardId}`, {
       method: "DELETE",
-      headers: {
-        authorization: "8999a51c-1ed0-4ed4-a807-902250d23524",
-      },
+      headers: this._headers
     })
-      .then((res) => {
-        if (res.ok) {
-          return res.json();
-        } else {
-          throw new Error(`Response is not OK with code ${res.status}`);
-        }
-      })
-      .catch((err) => {
-        console.error(err);
-      });
+    .then(this._checkResponse);
   }
 
   updateAvatar(avatar) {
-    return fetch(this.url + `/users/me/avatar`, {
+    return fetch(this._baseUrl + `/users/me/avatar`, {
       method: "PATCH",
-      headers: {
-        authorization: "8999a51c-1ed0-4ed4-a807-902250d23524",
-        "Content-Type": "application/json",
-      },
+      headers: this._headers,
       body: JSON.stringify({
         avatar: avatar,
       }),
     })
-      .then((res) => {
-        if (res.ok) {
-          return res.json();
-        } else {
-          throw new Error(`Response is not OK with code ${res.status}`);
-        }
-      })
-      .catch((err) => {
-        console.error(err);
-      });
+    .then(this._checkResponse);
   }
 
   like(cardId) {
-    return fetch(this.url + `/cards/likes/${cardId}`, {
+    return fetch(this._baseUrl + `/cards/likes/${cardId}`, {
       method: "PUT",
-      headers: {
-        authorization: "8999a51c-1ed0-4ed4-a807-902250d23524",
-      },
+      headers: this._headers,
     })
-      .then((res) => {
-        if (res.ok) {
-          return res.json();
-        } else {
-          throw new Error(`Response is not OK with code ${res.status}`);
-        }
-      })
-      .catch((err) => {
-        console.error(err);
-      });
+    .then(this._checkResponse);
   }
 
   likeDelete(cardId) {
-    return fetch(this.url + `/cards/likes/${cardId}`, {
+    return fetch(this._baseUrl + `/cards/likes/${cardId}`, {
       method: "DELETE",
-      headers: {
-        authorization: "8999a51c-1ed0-4ed4-a807-902250d23524",
-      },
+      headers: this._headers
     })
-      .then((res) => {
-        if (res.ok) {
-          return res.json();
-        } else {
-          throw new Error(`Response is not OK with code ${res.status}`);
-        }
-      })
-      .catch((err) => {
-        console.error(err);
-      });
+      .then(this._checkResponse);
   }
 }

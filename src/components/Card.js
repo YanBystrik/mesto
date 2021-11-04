@@ -1,14 +1,14 @@
 export default class Card {
   constructor(
     { data, openPopupWithDelete, handleCardClick, setLike, deleteLike },
-    selector
+    selector, userId
   ) {
     this._text = data.name;
     this._image = data.link;
     this._cardId = data._id;
     this._userId = data.owner._id;
     this._cardLikesArray = data.likes.length;
-    this._myUserId = "fdd469b9fcfa8739145a843b";
+    this._myUserId = userId;
     this._isLiked = data.likes.some((item) => item._id === this._myUserId);
     this._selector = selector;
     this.handleCardClick = handleCardClick;
@@ -39,6 +39,7 @@ export default class Card {
     this._cardLike = this._element.querySelector(".element__like");
     this._cardLikesCount = this._element.querySelector(".element__like-count");
     this._deleteButton = this._element.querySelector(".element__delete");
+    this._cardLikesCount = this._element.querySelector(".element__like-count");
     this._setEventListeners();
 
     this._cardImage.src = this._image;
@@ -85,16 +86,18 @@ export default class Card {
     }
   }
 
+  likeChangeTruth(){
+    this._isLiked = !this._isLiked;
+  }
+
   _likeSetEventListeners() {
     this._cardLike.addEventListener("click", () => {
       if (this._isLiked) {
         this._deleteLike(); // коллбэк на удаление
         this._likeHandleClick();
-        this._isLiked = false;
       } else {
         this._setLike(); // коллбэк на постановку лайка
         this._likeHandleClick();
-        this._isLiked = true;
       }
     });
   }
