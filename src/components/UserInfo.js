@@ -7,19 +7,14 @@ export default class UserInfo {
 
     getUserInfo(){
         return {
-            profileName: this.profileTitle.textContent,
-            profileJob: this.profileSubtitle.textContent
+            name: this.profileTitle.textContent,
+            about: this.profileSubtitle.textContent
         }
     }
 
     setUserInfo(data){
-        this.profileTitle.textContent = data.profileName;
-        this.profileSubtitle.textContent = data.profileJob;
-    }
-
-    setInfoFromApi(res){
-        this.profileTitle.textContent = res.name;
-        this.profileSubtitle.textContent = res.about;
-        this.profileAvatar.src = res.avatar;
+        this.profileTitle.textContent = data.name;
+        this.profileSubtitle.textContent = data.about;
+        this.profileAvatar.src = data.avatar;
     }
 }

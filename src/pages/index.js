@@ -27,7 +27,7 @@ import UserInfo from "../components/UserInfo.js";
 import Api from "../components/Api.js";
 import "./index.css";
 
-let userId = '';
+let userId = null;
 
 //Экземпляр API
 const api = new Api({
@@ -43,7 +43,7 @@ const api = new Api({
 api
   .getUserInfo()
   .then((res) => {
-    userInfo.setInfoFromApi(res);
+    userInfo.setUserInfo(res);
     userId = res._id;
   })
   .then(() => {
@@ -70,17 +70,17 @@ const userInfo = new UserInfo({
 
 const setInfo = () => {
   const userItems = userInfo.getUserInfo();
-  nameInput.value = userItems.profileName;
-  jobInput.value = userItems.profileJob;
+  nameInput.value = userItems.name;
+  jobInput.value = userItems.about;
 };
 
 //Экземпляр модалки Профиля
 const profileSample = new PopupWithForm({
   popupSelector: ".popup_profile",
   handleSubmitForm: (data) => {
-    userInfo.setUserInfo(data);
-    api.updateUserInfo(profileName, profileJob)
+    api.updateUserInfo(data.name, data.about)
     .then( (res) => {
+      userInfo.setUserInfo(res);
       profileSample.close();
     })
     .catch(err => {
@@ -185,7 +185,7 @@ const avatarSample = new PopupWithForm({
     avatar.link = data.avatarUrl;
     api.updateAvatar(avatar.link)
     .then((res) => {
-      userInfo.setInfoFromApi(res);
+      userInfo.setUserInfo(res);
       avatarSample.close();
     })
     .catch(err => {
