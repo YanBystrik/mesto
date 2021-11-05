@@ -115,6 +115,7 @@ const createCard = (item) => {
         .then((res) => {
           card.likeChangeTruth();
           card.likeCountChange(res);
+          card.likeHandleClick();
         })
         .catch( (err) => {
           console.error(err);
@@ -125,6 +126,7 @@ const createCard = (item) => {
         .then((res) => {
           card.likeChangeTruth();
           card.likeCountChange(res);
+          card.likeHandleClick();
         })
         .catch( (err) => {
           console.error(err);
@@ -168,11 +170,13 @@ const createSample = new PopupWithForm({
     .catch(err => {
       console.error(err);
     })
+    .finally( () => {
+      popupSubmitCreate.textContent = "Создать";
+    })
   },
 });
 createSample.setEventListeners();
 createPopupOpenButton.addEventListener("click", function (evt) {
-  popupSubmitCreate.textContent = "Создать";
   validFormCreate.resetValidation();
   createSample.open();
 });
@@ -191,11 +195,13 @@ const avatarSample = new PopupWithForm({
     .catch(err => {
       console.error(err);
     })
+    .finally( () => {
+      popupSubmitAvatar.textContent = "Сохранить";
+    })
   },
 });
 avatarSample.setEventListeners();
 avatarButton.addEventListener("click", function (evt) {
-  popupSubmitAvatar.textContent = "Сохранить";
   validFormAvatar.resetValidation();
   avatarSample.open();
 });
