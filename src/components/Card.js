@@ -94,15 +94,13 @@ export default class Card {
     this._cardLike.addEventListener("click", () => {
       if (this._isLiked) {
         this._deleteLike(); // коллбэк на удаление
-        this._likeHandleClick();
       } else {
         this._setLike(); // коллбэк на постановку лайка
-        this._likeHandleClick();
       }
     });
   }
 
-  _likeHandleClick() {
+  likeHandleClick() {
     this._cardLike.classList.toggle("element__like_active");
   }
 }
